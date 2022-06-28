@@ -11,13 +11,18 @@ export const AppProvider = ({ children }) => {
   const router  = useRouter();
   const [loading, setLoading] = useState(true) 
   const [user, setUser] = useState({});
+  const [allFretes, setAllFretes] = useState([]);
 
   useEffect(()=> {
-    getUser();    
+    getUser();
+    if(user){
+     getAllFretes(user.uid);
+    }
     return; 
    },[user])
-  
-  
+ 
+
+ //vereficar usuer logado 
   async function getUser() {      
     return await  onAuthStateChanged(auth, (usuario) => {
       if (usuario) {       
@@ -29,13 +34,49 @@ export const AppProvider = ({ children }) => {
       }
     })
   }
-
+  
   async function logout() {
     return await signOut(auth).then(()=>{
       setUser({});
       setLoading(true);
     })
   }
+
+  //api frete
+  const addfrete = async (id,price,distance,formPgt,rota) => {     
+    await app.firestore().collection('fretes').doc()
+    .set({            
+        postedBy:id,
+        driver: '',                  
+        price,
+        distance,
+        status : 'notificando',
+        obs: '',
+        formPgt,                                  
+        rota,
+        created: new Date()
+    })
+    .then(() => {                   
+        router.push('/dashboard')
+    })
+      .catch((error) => {console.log(error)});  
+  }
+
+  const getAllFretes = async (id) => {                   
+    app.auth().onAuthStateChanged(user=>{
+      if(user){
+        app.firestore().collection('fretes').where('postedBy', '==', user.uid)//.orderBy('created', 'desc')
+          .onSnapshot((snap) => {
+              const docs = snap.docs.map(doc=>({
+                  id: doc.id,
+                  ...doc.data()
+              }));              
+              setAllFretes(docs)         
+        })  
+      }
+    })        
+  }
+
  
   
   return (
@@ -43,7 +84,10 @@ export const AppProvider = ({ children }) => {
       user,
       loading,
       getUser,
-      logout 
+      logout,
+      addfrete,
+      getAllFretes,
+      allFretes 
       
     }}>{children}</AppContext.Provider>
   );
