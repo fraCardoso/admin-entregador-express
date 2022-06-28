@@ -1,5 +1,6 @@
 import '../styles/globals.css'
 import 'tailwindcss/tailwind.css'
+import '../styles/spinner.css'
 import { AppProvider } from '../config/AppContext'
 import Layout from '../components/Layout'
 

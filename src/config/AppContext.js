@@ -1,7 +1,7 @@
 import React, { useState,useEffect } from "react";
 import { useRouter } from 'next/router';
 import {app } from '../config/firebase'
-import { getAuth, onAuthStateChanged } from "firebase/auth";
+import { getAuth, onAuthStateChanged,signOut} from "firebase/auth";
 
 const auth = getAuth();
 
@@ -16,8 +16,8 @@ export const AppProvider = ({ children }) => {
     getUser();    
     return; 
    },[user])
- 
-
+  
+  
   async function getUser() {      
     return await  onAuthStateChanged(auth, (usuario) => {
       if (usuario) {       
@@ -29,13 +29,21 @@ export const AppProvider = ({ children }) => {
       }
     })
   }
+
+  async function logout() {
+    return await signOut(auth).then(()=>{
+      setUser('');
+      setLoading(true);
+    })
+  }
  
   
   return (
     <AppContext.Provider value={{           
       user,
       loading,
-      getUser 
+      getUser,
+      logout 
       
     }}>{children}</AppContext.Provider>
   );

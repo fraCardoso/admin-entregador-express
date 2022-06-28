@@ -1,4 +1,5 @@
 import Script from 'next/script'
+import Navbar from './Navbar'
 
 export default function Layout(props) {
       
@@ -8,7 +9,7 @@ export default function Layout(props) {
                 flex flex-col w-full h-full  
                 bg-gray-300 dark:bg-gray-800 
             `}>
-               
+                <Navbar />
                 <hr/>
                 <div className={`
                     flex flex-col mt-4
