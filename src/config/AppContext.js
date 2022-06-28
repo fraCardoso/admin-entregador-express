@@ -10,20 +10,19 @@ export const AppContext = React.createContext();
 export const AppProvider = ({ children }) => {
   const router  = useRouter();
   const [loading, setLoading] = useState(true) 
-  const [user, setUser] = useState('Francisco');
+  const [user, setUser] = useState({});
 
   useEffect(()=> {
-    getUser();
-    
+    getUser();    
     return; 
    },[user])
  
 
   async function getUser() {      
     return await  onAuthStateChanged(auth, (usuario) => {
-      if (usuario) {
-        setLoading(false);
-        setUser(usuario);      
+      if (usuario) {       
+        setUser(usuario); 
+        setLoading(false);    
         router.push("/");  
       }else{
         router.push("/signin");
@@ -34,7 +33,9 @@ export const AppProvider = ({ children }) => {
   
   return (
     <AppContext.Provider value={{           
-      user
+      user,
+      loading,
+      getUser 
       
     }}>{children}</AppContext.Provider>
   );
