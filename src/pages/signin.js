@@ -6,6 +6,7 @@ import  { AppContext } from '../config/AppContext'
 
 
 const auth = getAuth();
+auth.languageCode = 'it';
 
 export default function Signin() {
     const {user} = useContext(AppContext);

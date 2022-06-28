@@ -32,7 +32,7 @@ export const AppProvider = ({ children }) => {
 
   async function logout() {
     return await signOut(auth).then(()=>{
-      setUser('');
+      setUser({});
       setLoading(true);
     })
   }

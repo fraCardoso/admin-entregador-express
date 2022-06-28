@@ -12,7 +12,7 @@ export default function Navbar() {
                   <img src="/images/logo.svg" className="mr-3 h-10 sm:h-9" alt="Flowbite Logo" />
                 </div>
                 <div className="flex flex-grow justify-end items-center">
-                  {user ?<>                   
+                  {user.displayName ?<>                   
                    <p>Olá {user.displayName}</p>
                    <button  onClick={()=> logout()} className='ml-2 mr-2' >| Sair</button>
                    </>
