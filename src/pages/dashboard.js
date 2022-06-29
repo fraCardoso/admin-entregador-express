@@ -51,14 +51,17 @@ export default function Dashboard() {
                         <p className="text-2xl font-bold text-gray-700 dark:text-white">Rota com {f.rota.length} pontos</p>}  
                         {f.rota.map((r,i)=>(
                             <div key={i}>
-                                <p className="mt-2 text-gray-600 dark:text-gray-300">{key+1} - {r.location}</p>
+                                <p className="mt-2 text-gray-600 dark:text-gray-300">{i+1} - {r.location}</p>
                             </div>
                         ))}
+                        <p className="mt-2 text-gray-600 dark:text-gray-300">Valor: R$ {f.price.toFixed(2)} | {f.formPgt}</p>
+                        {f.driver ? <p className="mt-2 text-gray-600 dark:text-gray-300">Entregador: {f.driver} | {f.driverfone}</p>:
+                        <p className="mt-2 text-gray-600 dark:text-gray-300">Procurando entregadro...</p>}
                     </div> 
                     <div className="flex items-center justify-between mt-4">
                         <p  className="text-blue-600 dark:text-blue-400 hover:underline">Read more ⟶</p> 
                         <div className="flex items-center">                
-                        <p className="font-bold text-gray-700 cursor-pointer dark:text-gray-200">Procurando entregador...</p>
+                        
                         </div>
                     </div>
                 </div>

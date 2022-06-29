@@ -166,7 +166,7 @@ export default function AdfFrete() {
                 placeholder="Informe seu nome"
             />
             </div>
-            <button onClick={()=> addfrete(user.uid,price,distance,formPgt,rota)} 
+            <button onClick={()=> addfrete(user.uid,user.phoneNumber,user.displayName,price,distance,formPgt,rota)} 
             className="bg-green-400 hover:bg-green-800
                 text-white px-4 py-4 mt-2 w-full">
                     {rota.length < 2 ? '' : <>Confirmar frete</>}

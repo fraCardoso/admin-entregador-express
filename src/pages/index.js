@@ -10,6 +10,7 @@ export default function Home() {
   useEffect(()=> {    
     getUser();
     if(user){
+      console.log(user)
       getAllFretes(user.uid);
      }
     return;

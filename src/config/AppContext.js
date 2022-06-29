@@ -43,10 +43,12 @@ export const AppProvider = ({ children }) => {
   }
 
   //api frete
-  const addfrete = async (id,price,distance,formPgt,rota) => {     
+  const addfrete = async (id,contato,cliente,price,distance,formPgt,rota) => {     
     await app.firestore().collection('fretes').doc()
     .set({            
         postedBy:id,
+        contato,
+        cliente,
         driver: '',                  
         price,
         distance,
